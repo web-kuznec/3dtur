@@ -1,0 +1,1 @@
+<div class="tab_container">Страница администрирования</div>

@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /public/
+Disallow: /send
+
+User-agent: Yandex
+Disallow: /admin/
+Disallow: /public/
+Disallow: /send
+
+Host: www.3dtur24.ru

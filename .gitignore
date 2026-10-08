@@ -1,0 +1,55 @@
+# --- Kohana runtime (keep directories via nested .gitignore) ---
+application/logs/*
+!application/logs/.gitignore
+application/cache/*
+!application/cache/.gitignore
+panorama/
+
+# Generated upload / image cache
+public/img_cache/
+
+# --- Environment & secrets ---
+.env
+.env.*
+!.env.example
+secrets.env
+*.pem
+*.key
+
+# --- Docker (local overrides) ---
+docker-compose.override.yml
+.docker/
+
+# --- PHP ---
+vendor/
+composer.phar
+
+# --- Node (if added later) ---
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# --- IDE & editors ---
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# --- OS ---
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+desktop.ini
+
+# --- Logs & temp ---
+*.log
+*.tmp
+*.temp
+*.bak
+*.orig

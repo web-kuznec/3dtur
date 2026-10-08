@@ -1,0 +1,1 @@
+<div class="white_button" <? echo $params;?> ><span><? echo $name;?></span></div>

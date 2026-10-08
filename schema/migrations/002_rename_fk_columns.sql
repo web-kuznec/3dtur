@@ -1,0 +1,6 @@
+-- Renamed by schema/migrate.sh (002_rename_fk_columns):
+-- pages.FK_user -> user_id
+-- page_history.FK_page -> page_id, FK_user -> changed_by_user_id, user -> page_user_id
+-- articles_history.FK_id -> article_id, FK_group -> group_id
+-- users_history.FK_id -> user_id, FK_role -> role_id, FK_user -> changed_by_user_id
+-- articles_img index FK_articles -> articles_id

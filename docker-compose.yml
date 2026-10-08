@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  # Веб-сервер (Nginx + PHP-FPM)
+  web:
+    build:
+      context: .
+      args:
+        USER_ID: ${UID:-1000}
+        GROUP_ID: ${GID:-1000}
+    container_name: kohana_app
+    ports:
+      # Мапим порт 80 контейнера на порт 8080 твоего компьютера
+      - "83:80" 
+    volumes:
+      # Корень Kohana: index.php + application, modules, system, public
+      - .:/var/www/html
+      - ./nginx_site.conf:/etc/nginx/sites-enabled/default
+    environment:
+      # Включаем отображение ошибок для разработки
+      - PHP_DISPLAY_ERRORS=1
+      # Настраиваем размеры загружаемых файлов (если нужно)
+      - PHP_POST_MAX_SIZE=128M
+      - PHP_UPLOAD_MAX_FILESIZE=128M
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+
+  # База данных MySQL
+  db:
+    image: mysql:5.7
+    container_name: kohana_db
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: kohana_db
+      MYSQL_ROOT_PASSWORD: kohana
+      MYSQL_USER: kohana_user
+      MYSQL_PASSWORD: kohana_pass
+    volumes:
+      # Сохраняем данные базы даже после перезапуска контейнера
+      - db_data:/var/lib/mysql
+      # Авто-импорт дампа при первом запуске (когда volume db_data пустой)
+      - ./dump.sql:/docker-entrypoint-initdb.d/dump_3dtur.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ukohana_user", "-pkohana_pass"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+  # Одноразовые SQL-миграции (повторный up пропускает уже применённые)
+  migrate:
+    image: mysql:5.7
+    container_name: kohana_migrate
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      MYSQL_HOST: db
+      MYSQL_DATABASE: kohana_db
+      MYSQL_USER: kohana_user
+      MYSQL_PASSWORD: kohana_pass
+    volumes:
+      - ./schema:/schema:ro
+    entrypoint: ["/bin/bash", "/schema/migrate.sh"]
+    restart: "no"
+
+volumes:
+  db_data:

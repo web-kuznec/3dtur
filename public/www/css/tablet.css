@@ -1,0 +1,31 @@
+@media screen and (max-width: 1140px){
+    nav, content, section
+    {
+        padding: 0px 10px;
+    }
+    
+    section h1:first-child, section h2:first-child
+    {
+        margin-left: 0px;
+    }
+
+    section h1:first-child::before, section h2:first-child::before
+    {
+        content: none;
+    }
+    
+    .numbers
+    {
+        display: none;
+    }
+    
+    .clients .shadow2
+    {
+        right: 10px;
+    }
+    
+    .video iframe
+    {
+        height: 540px;
+    }
+}

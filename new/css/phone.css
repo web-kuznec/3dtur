@@ -1,0 +1,119 @@
+@media screen and (max-width: 767px)
+{
+    nav a.bars 
+    {
+        display: block;
+    }
+    
+    nav .menu
+    {
+        background: var(--black);
+        position: absolute;
+        right: 0;
+        z-index: 999;
+        border-radius: 5px;
+    }
+    
+    nav .menu li
+    {
+        display: block;
+        text-align: center;
+        padding: 10px;
+    }
+    
+    .btn-warning
+    {
+        margin-top: 50px;
+        width: 300px;
+    }
+    
+    .btn-warning:hover
+    {
+        background-position: 300px;
+    }
+
+    header h1
+    {
+        font-size: 2.3em;
+    }
+    
+    header h2
+    {
+        font-size: 1.5em;
+    }
+    
+    header phone a
+    {
+        font-size: 0.8em;
+    }
+    
+    img.social
+    {
+        margin-left: 5px;
+    }
+    
+    section h1, section h2
+    {
+        font-size: 1.5em;
+    }
+    
+    .advantages section
+    {
+        margin: 0;
+        padding: 40px 10px;
+    }
+    
+    .works-grid
+    {
+        display: grid;
+        grid-template-columns: [col_0] 1fr [col_1];
+        grid-template-rows: [row_0] 1fr [row_1] 1fr [row_2] 1fr [row_3] 1fr [row_4] 1fr [row_5];
+        grid-gap: 10px;
+    }
+
+    .works-grid .work
+    {
+        grid-column: auto !important;
+        grid-row: auto !important;
+    }
+    /*
+    .window-pano
+    {
+        display: none;
+    }*/
+    
+    section .row
+    {
+        margin: 0px;
+    }
+    
+    .clients .shadow2, .clients .shadow1
+    {
+        top: 12px;
+    }
+    
+    .video iframe
+    {
+        height: 340px;
+    }
+    
+    .form .btn-warning
+    {
+        width: 250px;
+        font-size: 1em;
+    }
+    
+    .form input
+    {
+        margin-bottom: 10px;
+    }
+}
+
+
+@media screen and (min-width: 768px)
+{
+    ul.menu
+    {
+        display: block !important;
+    }
+}
